@@ -1,0 +1,5 @@
+Nom du champ,Description,Type de donnée,Taille/Format,Contrainte,Exemple
+N° stagiaire,Numéro unique attribué à chaque stagiaire,Entier,3 chiffres max,Obligatoire, unique,100
+Nom de l'attaché,Nom et prénom du stagiaire,Texte,50 caractères max,Obligatoire,MARTIN, Paul
+Date de naissance,Date de naissance du stagiaire,Date,Format JJ/MM/AAAA,Obligatoire,15/10/1975
+Sexe,Sexe du stagiaire (H pour homme, F pour femme),Texte,1 caractère,Obligatoire,H

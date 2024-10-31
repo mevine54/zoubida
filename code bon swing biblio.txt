@@ -1,0 +1,1941 @@
+import javax.swing.border.EmptyBorder;
+
+
+package swing;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Library extends JFrame {
+
+    private JPanel contentPane;
+    private JButton addSubscriberButton;
+    private JButton addBookButton;
+    private JButton addBorrowButton;
+    private JButton displaySubscriberButton;
+    private JButton displayBookButton;
+    private JButton displayBorrowButton;
+    private JButton searchSubscriberButton;
+    private JButton searchBookButton;
+
+    public Library() {
+        setTitle("Dashboard Library Management");
+        setSize(300, 600); // Taille ajustée pour les boutons alignés verticalement
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS)); // Alignement vertical
+        setContentPane(contentPane);
+
+        // Initialiser les boutons
+        addSubscriberButton = new JButton("Add Subscriber");
+        addBookButton = new JButton("Add Book");
+        addBorrowButton = new JButton("Add Borrow");
+        displaySubscriberButton = new JButton("Display Subscriber List");
+        displayBookButton = new JButton("Display Book List");
+        displayBorrowButton = new JButton("Display Borrow List");
+        searchSubscriberButton = new JButton("Search Subscriber");
+        searchBookButton = new JButton("Search Book");
+
+        // Ajouter les boutons au contentPane
+        contentPane.add(addSubscriberButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
+        contentPane.add(addBookButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(addBorrowButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(displaySubscriberButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(displayBookButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(displayBorrowButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(searchSubscriberButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(searchBookButton);
+
+        // Ajouter les ActionListener aux boutons
+        addSubscriberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddSubscriberForm();
+            }
+        });
+
+        addBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddBookForm();
+            }
+        });
+
+        addBorrowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddBorrowForm();
+            }
+        });
+
+        displaySubscriberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDisplaySubscriberList();
+            }
+        });
+
+        displayBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDisplayBookList();
+            }
+        });
+
+        displayBorrowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDisplayBorrowList();
+            }
+        });
+
+        searchSubscriberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSearchSubscriberForm();
+            }
+        });
+
+        searchBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSearchBookForm();
+            }
+        });
+    }
+
+    private void showAddSubscriberForm() {
+        JFrame formFrame = new JFrame("Add Subscriber");
+        formFrame.setSize(400, 300);
+        formFrame.setLayout(new GridLayout(5, 2));
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        JLabel nameLabel = new JLabel("Name:");
+        JTextField nameField = new JTextField();
+        JLabel surnameLabel = new JLabel("Surname:");
+        JTextField surnameField = new JTextField();
+        JLabel emailLabel = new JLabel("Email:");
+        JTextField emailField = new JTextField();
+        JLabel dateLabel = new JLabel("Date:");
+        JLabel dateField = new JLabel(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+
+        JButton submitButton = new JButton("Submit");
+
+        formFrame.add(nameLabel);
+        formFrame.add(nameField);
+        formFrame.add(surnameLabel);
+        formFrame.add(surnameField);
+        formFrame.add(emailLabel);
+        formFrame.add(emailField);
+        formFrame.add(dateLabel);
+        formFrame.add(dateField);
+        formFrame.add(new JLabel()); // Empty cell
+        formFrame.add(submitButton);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Enregistrer l'abonné (ou traiter les données)
+                String name = nameField.getText();
+                String surname = surnameField.getText();
+                String email = emailField.getText();
+                String date = dateField.getText();
+
+                // Affichage ou traitement des données
+                JOptionPane.showMessageDialog(formFrame, "Subscriber added:\nName: " + name + "\nSurname: " + surname + "\nEmail: " + email + "\nDate: " + date);
+
+                formFrame.dispose(); // Fermer la fenêtre après soumission
+            }
+        });
+
+        formFrame.setVisible(true);
+    }
+
+    private void showAddBookForm() {
+        JFrame formFrame = new JFrame("Add Book");
+        formFrame.setSize(400, 300);
+        formFrame.setLayout(new GridLayout(4, 2));
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        JLabel titleLabel = new JLabel("Title:");
+        JTextField titleField = new JTextField();
+        JLabel authorLabel = new JLabel("Author:");
+        JTextField authorField = new JTextField();
+        JLabel isbnLabel = new JLabel("ISBN:");
+        JTextField isbnField = new JTextField();
+        JLabel dateLabel = new JLabel("Date:");
+        JLabel dateField = new JLabel(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+
+        JButton submitButton = new JButton("Submit");
+
+        formFrame.add(titleLabel);
+        formFrame.add(titleField);
+        formFrame.add(authorLabel);
+        formFrame.add(authorField);
+        formFrame.add(isbnLabel);
+        formFrame.add(isbnField);
+        formFrame.add(dateLabel);
+        formFrame.add(dateField);
+        formFrame.add(new JLabel()); // Empty cell
+        formFrame.add(submitButton);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Enregistrer le livre (ou traiter les données)
+                String title = titleField.getText();
+                String author = authorField.getText();
+                String isbn = isbnField.getText();
+                String date = dateField.getText();
+
+                // Affichage ou traitement des données
+                JOptionPane.showMessageDialog(formFrame, "Book added:\nTitle: " + title + "\nAuthor: " + author + "\nISBN: " + isbn + "\nDate: " + date);
+
+                formFrame.dispose(); // Fermer la fenêtre après soumission
+            }
+        });
+
+        formFrame.setVisible(true);
+    }
+
+    private void showAddBorrowForm() {
+        JFrame formFrame = new JFrame("Add Borrow");
+        formFrame.setSize(400, 300);
+        formFrame.setLayout(new GridLayout(4, 2));
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        JLabel bookLabel = new JLabel("Book Title:");
+        JTextField bookField = new JTextField();
+        JLabel borrowerLabel = new JLabel("Borrower:");
+        JTextField borrowerField = new JTextField();
+        JLabel borrowDateLabel = new JLabel("Borrow Date:");
+        JLabel borrowDateField = new JLabel(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+
+        JButton submitButton = new JButton("Submit");
+
+        formFrame.add(bookLabel);
+        formFrame.add(bookField);
+        formFrame.add(borrowerLabel);
+        formFrame.add(borrowerField);
+        formFrame.add(borrowDateLabel);
+        formFrame.add(borrowDateField);
+        formFrame.add(new JLabel()); // Empty cell
+        formFrame.add(submitButton);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Enregistrer l'emprunt (ou traiter les données)
+                String bookTitle = bookField.getText();
+                String borrower = borrowerField.getText();
+                String borrowDate = borrowDateField.getText();
+
+                // Affichage ou traitement des données
+                JOptionPane.showMessageDialog(formFrame, "Borrow record added:\nBook Title: " + bookTitle + "\nBorrower: " + borrower + "\nBorrow Date: " + borrowDate);
+
+                formFrame.dispose(); // Fermer la fenêtre après soumission
+            }
+        });
+
+        formFrame.setVisible(true);
+    }
+
+    private void showDisplaySubscriberList() {
+        JFrame displayFrame = new JFrame("Subscriber List");
+        displayFrame.setSize(400, 300);
+        displayFrame.setLayout(new BorderLayout());
+        displayFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayFrame.setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea("Displaying Subscriber List...\n[Data would be shown here]");
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        displayFrame.add(scrollPane, BorderLayout.CENTER);
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayFrame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+        displayFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        displayFrame.setVisible(true);
+    }
+
+    private void showDisplayBookList() {
+        JFrame displayFrame = new JFrame("Book List");
+        displayFrame.setSize(400, 300);
+        displayFrame.setLayout(new BorderLayout());
+        displayFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayFrame.setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea("Displaying Book List...\n[Data would be shown here]");
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        displayFrame.add(scrollPane, BorderLayout.CENTER);
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayFrame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+        displayFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        displayFrame.setVisible(true);
+    }
+
+    private void showDisplayBorrowList() {
+        JFrame displayFrame = new JFrame("Borrow List");
+        displayFrame.setSize(400, 300);
+        displayFrame.setLayout(new BorderLayout());
+        displayFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayFrame.setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea("Displaying Borrow List...\n[Data would be shown here]");
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        displayFrame.add(scrollPane, BorderLayout.CENTER);
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayFrame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+        displayFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        displayFrame.setVisible(true);
+    }
+
+    private void showSearchSubscriberForm() {
+        JFrame formFrame = new JFrame("Search Subscriber");
+        formFrame.setSize(400, 200);
+        formFrame.setLayout(new GridLayout(2, 2));
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        JLabel searchLabel = new JLabel("Enter Name or Email:");
+        JTextField searchField = new JTextField();
+
+        JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Effectuer la recherche et afficher les résultats
+                String searchTerm = searchField.getText();
+                JOptionPane.showMessageDialog(formFrame, "Searching for subscriber with: " + searchTerm);
+            }
+        });
+
+        formFrame.add(searchLabel);
+        formFrame.add(searchField);
+        formFrame.add(new JLabel()); // Empty cell
+        formFrame.add(searchButton);
+
+        formFrame.setVisible(true);
+    }
+
+    private void showSearchBookForm() {
+        JFrame formFrame = new JFrame("Search Book");
+        formFrame.setSize(400, 200);
+        formFrame.setLayout(new GridLayout(2, 2));
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        JLabel searchLabel = new JLabel("Enter Title or ISBN:");
+        JTextField searchField = new JTextField();
+
+        JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Effectuer la recherche et afficher les résultats
+                String searchTerm = searchField.getText();
+                JOptionPane.showMessageDialog(formFrame, "Searching for book with: " + searchTerm);
+            }
+        });
+
+        formFrame.add(searchLabel);
+        formFrame.add(searchField);
+        formFrame.add(new JLabel()); // Empty cell
+        formFrame.add(searchButton);
+
+        formFrame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new Library().setVisible(true);
+            }
+        });
+    }
+}
+
+
+
+package swing;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Library extends JFrame {
+
+    private JPanel contentPane;
+    private JButton addSubscriberButton;
+    private JButton addBookButton;
+    private JButton addBorrowButton;
+    private JButton displaySubscriberButton;
+    private JButton displayBookButton;
+    private JButton displayBorrowButton;
+    private JButton searchSubscriberButton;
+    private JButton searchBookButton;
+
+    public Library() {
+        setTitle("Dashboard Library Management");
+        setSize(300, 600); // Ajuster la taille pour contenir tous les boutons
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS)); // Alignement vertical
+        setContentPane(contentPane);
+
+        // Initialiser les boutons
+        addSubscriberButton = createButton("Add Subscriber");
+        addBookButton = createButton("Add Book");
+        addBorrowButton = createButton("Add Borrow");
+        displaySubscriberButton = createButton("Display Subscriber List");
+        displayBookButton = createButton("Display Book List");
+        displayBorrowButton = createButton("Display Borrow List");
+        searchSubscriberButton = createButton("Search Subscriber");
+        searchBookButton = createButton("Search Book");
+
+        // Ajouter les boutons au contentPane
+        contentPane.add(addSubscriberButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement entre les boutons
+        contentPane.add(addBookButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(addBorrowButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(displaySubscriberButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(displayBookButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(displayBorrowButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(searchSubscriberButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(searchBookButton);
+
+        // Ajouter les ActionListener aux boutons
+        addSubscriberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddSubscriberForm();
+            }
+        });
+
+        addBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddBookForm();
+            }
+        });
+
+        addBorrowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddBorrowForm();
+            }
+        });
+
+        displaySubscriberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDisplaySubscriberList();
+            }
+        });
+
+        displayBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDisplayBookList();
+            }
+        });
+
+        displayBorrowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDisplayBorrowList();
+            }
+        });
+
+        searchSubscriberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSearchSubscriberForm();
+            }
+        });
+
+        searchBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSearchBookForm();
+            }
+        });
+    }
+
+    private JButton createButton(String text) {
+        JButton button = new JButton(text);
+        button.setPreferredSize(new Dimension(250, 40)); // Fixer une taille uniforme
+        return button;
+    }
+
+    private void showAddSubscriberForm() {
+        JFrame formFrame = new JFrame("Add Subscriber");
+        formFrame.setSize(400, 300);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel nameLabel = new JLabel("Name:");
+        JTextField nameField = new JTextField(20);
+        JLabel surnameLabel = new JLabel("Surname:");
+        JTextField surnameField = new JTextField(20);
+        JLabel emailLabel = new JLabel("Email:");
+        JTextField emailField = new JTextField(20);
+        JLabel dateLabel = new JLabel("Date:");
+        JLabel dateField = new JLabel(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+
+        JButton submitButton = new JButton("Submit");
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(nameLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(nameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formFrame.add(surnameLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(surnameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formFrame.add(emailLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(emailField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        formFrame.add(dateLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(dateField, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(submitButton, gbc);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Enregistrer l'abonné (ou traiter les données)
+                String name = nameField.getText();
+                String surname = surnameField.getText();
+                String email = emailField.getText();
+                String date = dateField.getText();
+
+                // Affichage ou traitement des données
+                JOptionPane.showMessageDialog(formFrame, "Subscriber added:\nName: " + name + "\nSurname: " + surname + "\nEmail: " + email + "\nDate: " + date);
+
+                formFrame.dispose(); // Fermer la fenêtre après soumission
+            }
+        });
+
+        formFrame.setVisible(true);
+    }
+
+    private void showAddBookForm() {
+        JFrame formFrame = new JFrame("Add Book");
+        formFrame.setSize(400, 250);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel titleLabel = new JLabel("Title:");
+        JTextField titleField = new JTextField(20);
+        JLabel authorLabel = new JLabel("Author:");
+        JTextField authorField = new JTextField(20);
+        JLabel isbnLabel = new JLabel("ISBN:");
+        JTextField isbnField = new JTextField(20);
+        JLabel dateLabel = new JLabel("Date:");
+        JLabel dateField = new JLabel(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+
+        JButton submitButton = new JButton("Submit");
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(titleLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(titleField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formFrame.add(authorLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(authorField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formFrame.add(isbnLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(isbnField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        formFrame.add(dateLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(dateField, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(submitButton, gbc);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Enregistrer le livre (ou traiter les données)
+                String title = titleField.getText();
+                String author = authorField.getText();
+                String isbn = isbnField.getText();
+                String date = dateField.getText();
+
+                // Affichage ou traitement des données
+                JOptionPane.showMessageDialog(formFrame, "Book added:\nTitle: " + title + "\nAuthor: " + author + "\nISBN: " + isbn + "\nDate: " + date);
+
+                formFrame.dispose(); // Fermer la fenêtre après soumission
+            }
+        });
+
+        formFrame.setVisible(true);
+    }
+
+    private void showAddBorrowForm() {
+        JFrame formFrame = new JFrame("Add Borrow");
+        formFrame.setSize(400, 200);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel bookLabel = new JLabel("Book Title:");
+        JTextField bookField = new JTextField(20);
+        JLabel borrowerLabel = new JLabel("Borrower:");
+        JTextField borrowerField = new JTextField(20);
+        JLabel borrowDateLabel = new JLabel("Borrow Date:");
+        JLabel borrowDateField = new JLabel(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+
+        JButton submitButton = new JButton("Submit");
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(bookLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(bookField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formFrame.add(borrowerLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(borrowerField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formFrame.add(borrowDateLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(borrowDateField, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(submitButton, gbc);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Enregistrer l'emprunt (ou traiter les données)
+                String book = bookField.getText();
+                String borrower = borrowerField.getText();
+                String borrowDate = borrowDateField.getText();
+
+                // Affichage ou traitement des données
+                JOptionPane.showMessageDialog(formFrame, "Borrow record:\nBook Title: " + book + "\nBorrower: " + borrower + "\nBorrow Date: " + borrowDate);
+
+                formFrame.dispose(); // Fermer la fenêtre après soumission
+            }
+        });
+
+        formFrame.setVisible(true);
+    }
+
+    private void showDisplaySubscriberList() {
+        JFrame displayFrame = new JFrame("Subscriber List");
+        displayFrame.setSize(400, 300);
+        displayFrame.setLayout(new BorderLayout());
+        displayFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayFrame.setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea("Displaying Subscriber List...\n[Data would be shown here]");
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        displayFrame.add(scrollPane, BorderLayout.CENTER);
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayFrame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+        displayFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        displayFrame.setVisible(true);
+    }
+
+    private void showDisplayBookList() {
+        JFrame displayFrame = new JFrame("Book List");
+        displayFrame.setSize(400, 300);
+        displayFrame.setLayout(new BorderLayout());
+        displayFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayFrame.setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea("Displaying Book List...\n[Data would be shown here]");
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        displayFrame.add(scrollPane, BorderLayout.CENTER);
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayFrame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+        displayFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        displayFrame.setVisible(true);
+    }
+
+    private void showDisplayBorrowList() {
+        JFrame displayFrame = new JFrame("Borrow List");
+        displayFrame.setSize(400, 300);
+        displayFrame.setLayout(new BorderLayout());
+        displayFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayFrame.setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea("Displaying Borrow List...\n[Data would be shown here]");
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        displayFrame.add(scrollPane, BorderLayout.CENTER);
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayFrame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+        displayFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        displayFrame.setVisible(true);
+    }
+
+    private void showSearchSubscriberForm() {
+        JFrame formFrame = new JFrame("Search Subscriber");
+        formFrame.setSize(400, 200);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel searchLabel = new JLabel("Enter Name or Email:");
+        JTextField searchField = new JTextField(20);
+
+        JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Effectuer la recherche et afficher les résultats
+                String searchTerm = searchField.getText();
+                JOptionPane.showMessageDialog(formFrame, "Searching for subscriber with: " + searchTerm);
+            }
+        });
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(searchLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(searchField, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(searchButton, gbc);
+
+        formFrame.setVisible(true);
+    }
+
+    private void showSearchBookForm() {
+        JFrame formFrame = new JFrame("Search Book");
+        formFrame.setSize(400, 200);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel searchLabel = new JLabel("Enter Title or ISBN:");
+        JTextField searchField = new JTextField(20);
+
+        JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Effectuer la recherche et afficher les résultats
+                String searchTerm = searchField.getText();
+                JOptionPane.showMessageDialog(formFrame, "Searching for book with: " + searchTerm);
+            }
+        });
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(searchLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(searchField, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(searchButton, gbc);
+
+        formFrame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new Library().setVisible(true);
+            }
+        });
+    }
+}
+
+
+
+
+
+package swing;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Library extends JFrame {
+
+    private JPanel contentPane;
+    private JButton addSubscriberButton;
+    private JButton addBookButton;
+    private JButton addBorrowButton;
+    private JButton displaySubscriberButton;
+    private JButton displayBookButton;
+    private JButton displayBorrowButton;
+    private JButton searchSubscriberButton;
+    private JButton searchBookButton;
+
+    public Library() {
+        setTitle("Dashboard Library Management");
+        setSize(300, 600); // Ajuster la taille pour contenir tous les boutons
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS)); // Alignement vertical
+        setContentPane(contentPane);
+
+        // Initialiser les boutons
+        addSubscriberButton = createButton("Add Subscriber");
+        addBookButton = createButton("Add Book");
+        addBorrowButton = createButton("Add Borrow");
+        displaySubscriberButton = createButton("Display Subscriber List");
+        displayBookButton = createButton("Display Book List");
+        displayBorrowButton = createButton("Display Borrow List");
+        searchSubscriberButton = createButton("Search Subscriber");
+        searchBookButton = createButton("Search Book");
+
+        // Ajouter les boutons au contentPane
+        contentPane.add(addSubscriberButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement entre les boutons
+        contentPane.add(addBookButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(addBorrowButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(displaySubscriberButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(displayBookButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(displayBorrowButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(searchSubscriberButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(searchBookButton);
+
+        // Ajouter les ActionListener aux boutons
+        addSubscriberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddSubscriberForm();
+            }
+        });
+
+        addBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddBookForm();
+            }
+        });
+
+        addBorrowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddBorrowForm();
+            }
+        });
+
+        displaySubscriberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDisplaySubscriberList();
+            }
+        });
+
+        displayBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDisplayBookList();
+            }
+        });
+
+        displayBorrowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDisplayBorrowList();
+            }
+        });
+
+        searchSubscriberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSearchSubscriberForm();
+            }
+        });
+
+        searchBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSearchBookForm();
+            }
+        });
+    }
+
+    private JButton createButton(String text) {
+        JButton button = new JButton(text);
+        button.setPreferredSize(new Dimension(250, 40)); // Fixer une taille uniforme
+        return button;
+    }
+
+    private void showAddSubscriberForm() {
+        JFrame formFrame = new JFrame("Add Subscriber");
+        formFrame.setSize(400, 300);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel nameLabel = new JLabel("Name:");
+        JTextField nameField = new JTextField(20);
+        JLabel surnameLabel = new JLabel("Surname:");
+        JTextField surnameField = new JTextField(20);
+        JLabel emailLabel = new JLabel("Email:");
+        JTextField emailField = new JTextField(20);
+        JLabel dateLabel = new JLabel("Date:");
+        JLabel dateField = new JLabel(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+
+        JButton submitButton = new JButton("Submit");
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(nameLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(nameField, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formFrame.add(surnameLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(surnameField, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formFrame.add(emailLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(emailField, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        formFrame.add(dateLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(dateField, gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(submitButton, gbc);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Enregistrer l'abonné (ou traiter les données)
+                String name = nameField.getText();
+                String surname = surnameField.getText();
+                String email = emailField.getText();
+                String date = dateField.getText();
+
+                // Affichage ou traitement des données
+                JOptionPane.showMessageDialog(formFrame, "Subscriber added:\nName: " + name + "\nSurname: " + surname + "\nEmail: " + email + "\nDate: " + date);
+
+                formFrame.dispose(); // Fermer la fenêtre après soumission
+            }
+        });
+
+        formFrame.setVisible(true);
+    }
+
+    private void showAddBookForm() {
+        JFrame formFrame = new JFrame("Add Book");
+        formFrame.setSize(400, 250);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel titleLabel = new JLabel("Title:");
+        JTextField titleField = new JTextField(20);
+        JLabel authorLabel = new JLabel("Author:");
+        JTextField authorField = new JTextField(20);
+        JLabel isbnLabel = new JLabel("ISBN:");
+        JTextField isbnField = new JTextField(20);
+        JLabel dateLabel = new JLabel("Date:");
+        JLabel dateField = new JLabel(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+
+        JButton submitButton = new JButton("Submit");
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(titleLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(titleField, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formFrame.add(authorLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(authorField, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formFrame.add(isbnLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(isbnField, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        formFrame.add(dateLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(dateField, gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(submitButton, gbc);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Enregistrer le livre (ou traiter les données)
+                String title = titleField.getText();
+                String author = authorField.getText();
+                String isbn = isbnField.getText();
+                String date = dateField.getText();
+
+                // Affichage ou traitement des données
+                JOptionPane.showMessageDialog(formFrame, "Book added:\nTitle: " + title + "\nAuthor: " + author + "\nISBN: " + isbn + "\nDate: " + date);
+
+                formFrame.dispose(); // Fermer la fenêtre après soumission
+            }
+        });
+
+        formFrame.setVisible(true);
+    }
+
+    private void showAddBorrowForm() {
+        JFrame formFrame = new JFrame("Add Borrow");
+        formFrame.setSize(400, 250);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel bookLabel = new JLabel("Book:");
+        JComboBox<String> bookComboBox = new JComboBox<>(new String[] {"Book 1", "Book 2", "Book 3"});
+        JLabel borrowerLabel = new JLabel("Borrower:");
+        JComboBox<String> borrowerComboBox = new JComboBox<>(new String[] {"Borrower 1", "Borrower 2", "Borrower 3"});
+        JLabel borrowDateLabel = new JLabel("Borrow Date:");
+        JTextField borrowDateField = new JTextField(new SimpleDateFormat("dd/MM/yyyy").format(new Date()), 10);
+
+        JButton submitButton = new JButton("Submit");
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(bookLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(bookComboBox, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formFrame.add(borrowerLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(borrowerComboBox, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formFrame.add(borrowDateLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(borrowDateField, gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(submitButton, gbc);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Enregistrer le prêt (ou traiter les données)
+                String book = (String) bookComboBox.getSelectedItem();
+                String borrower = (String) borrowerComboBox.getSelectedItem();
+                String borrowDate = borrowDateField.getText();
+
+                // Affichage ou traitement des données
+                JOptionPane.showMessageDialog(formFrame, "Borrow record:\nBook Title: " + book + "\nBorrower: " + borrower + "\nBorrow Date: " + borrowDate);
+
+                formFrame.dispose(); // Fermer la fenêtre après soumission
+            }
+        });
+
+        formFrame.setVisible(true);
+    }
+
+    private void showDisplaySubscriberList() {
+        JFrame displayFrame = new JFrame("Subscriber List");
+        displayFrame.setSize(400, 300);
+        displayFrame.setLayout(new BorderLayout());
+        displayFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayFrame.setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea("Displaying Subscriber List...\n[Data would be shown here]");
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        displayFrame.add(scrollPane, BorderLayout.CENTER);
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayFrame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+        displayFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        displayFrame.setVisible(true);
+    }
+
+    private void showDisplayBookList() {
+        JFrame displayFrame = new JFrame("Book List");
+        displayFrame.setSize(400, 300);
+        displayFrame.setLayout(new BorderLayout());
+        displayFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayFrame.setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea("Displaying Book List...\n[Data would be shown here]");
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        displayFrame.add(scrollPane, BorderLayout.CENTER);
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayFrame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+        displayFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        displayFrame.setVisible(true);
+    }
+
+    private void showDisplayBorrowList() {
+        JFrame displayFrame = new JFrame("Borrow List");
+        displayFrame.setSize(400, 300);
+        displayFrame.setLayout(new BorderLayout());
+        displayFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayFrame.setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea("Displaying Borrow List...\n[Data would be shown here]");
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        displayFrame.add(scrollPane, BorderLayout.CENTER);
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayFrame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+        displayFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        displayFrame.setVisible(true);
+    }
+
+    private void showSearchSubscriberForm() {
+        JFrame formFrame = new JFrame("Search Subscriber");
+        formFrame.setSize(400, 200);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel searchLabel = new JLabel("Enter Name or Email:");
+        JTextField searchField = new JTextField(20);
+
+        JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Effectuer la recherche et afficher les résultats
+                String searchTerm = searchField.getText();
+                JOptionPane.showMessageDialog(formFrame, "Searching for subscriber with: " + searchTerm);
+            }
+        });
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(searchLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(searchField, gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(searchButton, gbc);
+
+        formFrame.setVisible(true);
+    }
+
+    private void showSearchBookForm() {
+        JFrame formFrame = new JFrame("Search Book");
+        formFrame.setSize(400, 200);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel searchLabel = new JLabel("Enter Title or ISBN:");
+        JTextField searchField = new JTextField(20);
+
+        JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Effectuer la recherche et afficher les résultats
+                String searchTerm = searchField.getText();
+                JOptionPane.showMessageDialog(formFrame, "Searching for book with: " + searchTerm);
+            }
+        });
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(searchLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(searchField, gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(searchButton, gbc);
+
+        formFrame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new Library().setVisible(true);
+            }
+        });
+    }
+}
+
+
+import javax.swing.border.EmptyBorder;
+
+package swing;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class Library extends JFrame {
+
+    private JPanel contentPane;
+    private JButton addSubscriberButton;
+    private JButton addBookButton;
+    private JButton addBorrowButton;
+    private JButton displaySubscriberButton;
+    private JButton displayBookButton;
+    private JButton displayBorrowButton;
+    private JButton searchSubscriberButton;
+    private JButton searchBookButton;
+
+    private List<String> subscribers;
+    private List<String> books;
+    private List<String> borrows;
+
+    public Library() {
+        setTitle("Dashboard Library Management");
+        setSize(300, 600); // Ajuster la taille pour contenir tous les boutons
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        // Initialiser les listes de données fictives
+        subscribers = new ArrayList<>();
+        books = new ArrayList<>();
+        borrows = new ArrayList<>();
+
+        subscribers.add("John Doe - john.doe@example.com");
+        subscribers.add("Jane Smith - jane.smith@example.com");
+
+        books.add("Book 1 - Author 1");
+        books.add("Book 2 - Author 2");
+
+        borrows.add("Book 1 borrowed by John Doe on 01/01/2024");
+        borrows.add("Book 2 borrowed by Jane Smith on 02/01/2024");
+
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS)); // Alignement vertical
+        setContentPane(contentPane);
+
+        // Initialiser les boutons
+        addSubscriberButton = createButton("Add Subscriber");
+        addBookButton = createButton("Add Book");
+        addBorrowButton = createButton("Add Borrow");
+        displaySubscriberButton = createButton("Display Subscriber List");
+        displayBookButton = createButton("Display Book List");
+        displayBorrowButton = createButton("Display Borrow List");
+        searchSubscriberButton = createButton("Search Subscriber");
+        searchBookButton = createButton("Search Book");
+
+        // Ajouter les boutons au contentPane
+        contentPane.add(addSubscriberButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement entre les boutons
+        contentPane.add(addBookButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(addBorrowButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(displaySubscriberButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(displayBookButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(displayBorrowButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(searchSubscriberButton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPane.add(searchBookButton);
+
+        // Ajouter les ActionListener aux boutons
+        addSubscriberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddSubscriberForm();
+            }
+        });
+
+        addBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddBookForm();
+            }
+        });
+
+        addBorrowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddBorrowForm();
+            }
+        });
+
+        displaySubscriberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDisplaySubscriberList();
+            }
+        });
+
+        displayBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDisplayBookList();
+            }
+        });
+
+        displayBorrowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDisplayBorrowList();
+            }
+        });
+
+        searchSubscriberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSearchSubscriberForm();
+            }
+        });
+
+        searchBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSearchBookForm();
+            }
+        });
+    }
+
+    private JButton createButton(String text) {
+        JButton button = new JButton(text);
+        button.setPreferredSize(new Dimension(250, 40)); // Fixer une taille uniforme
+        return button;
+    }
+
+    private void showAddSubscriberForm() {
+        JFrame formFrame = new JFrame("Add Subscriber");
+        formFrame.setSize(400, 300);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel nameLabel = new JLabel("Name:");
+        JTextField nameField = new JTextField(20);
+        JLabel surnameLabel = new JLabel("Surname:");
+        JTextField surnameField = new JTextField(20);
+        JLabel emailLabel = new JLabel("Email:");
+        JTextField emailField = new JTextField(20);
+        JLabel dateLabel = new JLabel("Date:");
+        JLabel dateField = new JLabel(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+
+        JButton submitButton = new JButton("Submit");
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(nameLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(nameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formFrame.add(surnameLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(surnameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formFrame.add(emailLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(emailField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        formFrame.add(dateLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(dateField, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(submitButton, gbc);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Enregistrer l'abonné (ou traiter les données)
+                String name = nameField.getText();
+                String surname = surnameField.getText();
+                String email = emailField.getText();
+                String date = dateField.getText();
+
+                // Ajouter l'abonné à la liste fictive
+                subscribers.add(name + " " + surname + " - " + email);
+
+                JOptionPane.showMessageDialog(formFrame, "Subscriber added:\nName: " + name + "\nSurname: " + surname + "\nEmail: " + email + "\nDate: " + date);
+
+                formFrame.dispose(); // Fermer la fenêtre après soumission
+            }
+        });
+
+        formFrame.setVisible(true);
+    }
+
+    private void showAddBookForm() {
+        JFrame formFrame = new JFrame("Add Book");
+        formFrame.setSize(400, 250);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel titleLabel = new JLabel("Title:");
+        JTextField titleField = new JTextField(20);
+        JLabel authorLabel = new JLabel("Author:");
+        JTextField authorField = new JTextField(20);
+        JLabel isbnLabel = new JLabel("ISBN:");
+        JTextField isbnField = new JTextField(20);
+        JLabel dateLabel = new JLabel("Date:");
+        JLabel dateField = new JLabel(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+
+        JButton submitButton = new JButton("Submit");
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(titleLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(titleField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formFrame.add(authorLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(authorField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formFrame.add(isbnLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(isbnField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        formFrame.add(dateLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(dateField, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(submitButton, gbc);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Enregistrer le livre (ou traiter les données)
+                String title = titleField.getText();
+                String author = authorField.getText();
+                String isbn = isbnField.getText();
+                String date = dateField.getText();
+
+                // Ajouter le livre à la liste fictive
+                books.add("Title: " + title + " - Author: " + author + " - ISBN: " + isbn + " - Date: " + date);
+
+                JOptionPane.showMessageDialog(formFrame, "Book added:\nTitle: " + title + "\nAuthor: " + author + "\nISBN: " + isbn + "\nDate: " + date);
+
+                formFrame.dispose(); // Fermer la fenêtre après soumission
+            }
+        });
+
+        formFrame.setVisible(true);
+    }
+
+    private void showAddBorrowForm() {
+        JFrame formFrame = new JFrame("Add Borrow");
+        formFrame.setSize(400, 250);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel bookLabel = new JLabel("Book:");
+        JComboBox<String> bookComboBox = new JComboBox<>(new String[] {"Book 1", "Book 2", "Book 3"});
+        JLabel borrowerLabel = new JLabel("Borrower:");
+        JComboBox<String> borrowerComboBox = new JComboBox<>(new String[] {"Borrower 1", "Borrower 2", "Borrower 3"});
+        JLabel borrowDateLabel = new JLabel("Borrow Date:");
+        JTextField borrowDateField = new JTextField(new SimpleDateFormat("dd/MM/yyyy").format(new Date()), 10);
+
+        JButton submitButton = new JButton("Submit");
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(bookLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(bookComboBox, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formFrame.add(borrowerLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(borrowerComboBox, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formFrame.add(borrowDateLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(borrowDateField, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(submitButton, gbc);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Enregistrer le prêt (ou traiter les données)
+                String book = (String) bookComboBox.getSelectedItem();
+                String borrower = (String) borrowerComboBox.getSelectedItem();
+                String borrowDate = borrowDateField.getText();
+
+                // Ajouter le prêt à la liste fictive
+                borrows.add("Book: " + book + " - Borrower: " + borrower + " - Date: " + borrowDate);
+
+                JOptionPane.showMessageDialog(formFrame, "Borrow record:\nBook Title: " + book + "\nBorrower: " + borrower + "\nBorrow Date: " + borrowDate);
+
+                formFrame.dispose(); // Fermer la fenêtre après soumission
+            }
+        });
+
+        formFrame.setVisible(true);
+    }
+
+    private void showDisplaySubscriberList() {
+        JFrame displayFrame = new JFrame("Subscriber List");
+        displayFrame.setSize(400, 300);
+        displayFrame.setLayout(new BorderLayout());
+        displayFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayFrame.setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        displayFrame.add(scrollPane, BorderLayout.CENTER);
+
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayFrame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+        displayFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        // Remplir le JTextArea avec les abonnés
+        StringBuilder sb = new StringBuilder();
+        for (String subscriber : subscribers) {
+            sb.append(subscriber).append("\n");
+        }
+        textArea.setText(sb.toString());
+
+        displayFrame.setVisible(true);
+    }
+
+    private void showDisplayBookList() {
+        JFrame displayFrame = new JFrame("Book List");
+        displayFrame.setSize(400, 300);
+        displayFrame.setLayout(new BorderLayout());
+        displayFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayFrame.setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        displayFrame.add(scrollPane, BorderLayout.CENTER);
+
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayFrame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+        displayFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        // Remplir le JTextArea avec les livres
+        StringBuilder sb = new StringBuilder();
+        for (String book : books) {
+            sb.append(book).append("\n");
+        }
+        textArea.setText(sb.toString());
+
+        displayFrame.setVisible(true);
+    }
+
+    private void showDisplayBorrowList() {
+        JFrame displayFrame = new JFrame("Borrow List");
+        displayFrame.setSize(400, 300);
+        displayFrame.setLayout(new BorderLayout());
+        displayFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayFrame.setLocationRelativeTo(null);
+
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        displayFrame.add(scrollPane, BorderLayout.CENTER);
+
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                displayFrame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+        displayFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        // Remplir le JTextArea avec les prêts
+        StringBuilder sb = new StringBuilder();
+        for (String borrow : borrows) {
+            sb.append(borrow).append("\n");
+        }
+        textArea.setText(sb.toString());
+
+        displayFrame.setVisible(true);
+    }
+
+    private void showSearchSubscriberForm() {
+        JFrame formFrame = new JFrame("Search Subscriber");
+        formFrame.setSize(400, 200);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel searchLabel = new JLabel("Enter Name or Email:");
+        JTextField searchField = new JTextField(20);
+
+        JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Effectuer la recherche et afficher les résultats
+                String searchTerm = searchField.getText();
+                StringBuilder results = new StringBuilder();
+                for (String subscriber : subscribers) {
+                    if (subscriber.toLowerCase().contains(searchTerm.toLowerCase())) {
+                        results.append(subscriber).append("\n");
+                    }
+                }
+
+                if (results.length() == 0) {
+                    results.append("No results found.");
+                }
+
+                JOptionPane.showMessageDialog(formFrame, "Search results:\n" + results.toString());
+            }
+        });
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(searchLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(searchField, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(searchButton, gbc);
+
+        formFrame.setVisible(true);
+    }
+
+    private void showSearchBookForm() {
+        JFrame formFrame = new JFrame("Search Book");
+        formFrame.setSize(400, 200);
+        formFrame.setLayout(new GridBagLayout());
+        formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        formFrame.setLocationRelativeTo(null);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espacement entre les composants
+
+        JLabel searchLabel = new JLabel("Enter Title or ISBN:");
+        JTextField searchField = new JTextField(20);
+
+        JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Effectuer la recherche et afficher les résultats
+                String searchTerm = searchField.getText();
+                StringBuilder results = new StringBuilder();
+                for (String book : books) {
+                    if (book.toLowerCase().contains(searchTerm.toLowerCase())) {
+                        results.append(book).append("\n");
+                    }
+                }
+
+                if (results.length() == 0) {
+                    results.append("No results found.");
+                }
+
+                JOptionPane.showMessageDialog(formFrame, "Search results:\n" + results.toString());
+            }
+        });
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formFrame.add(searchLabel, gbc);
+        gbc.gridx = 1;
+        formFrame.add(searchField, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        formFrame.add(searchButton, gbc);
+
+        formFrame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new Library().setVisible(true);
+            }
+        });
+    }
+}
+

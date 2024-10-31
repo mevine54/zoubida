@@ -1,0 +1,9 @@
+Nom du champ,Description,Type de donnée,Taille/Format,Contrainte,Exemple
+Nom de la plage,Nom de la plage,Texte,100 caractères max,Obligatoire,Plage du Soleil
+Ville,Ville à laquelle la plage appartient,Texte,50 caractères max,Obligatoire,Nice
+Code postal,Code postal de la ville,Entier,5 chiffres max,Obligatoire,06000
+Longueur de la plage,Longueur de la plage en kilomètres,Décimal,3,2 (max),Obligatoire,1.25
+Nature du terrain,Type de terrain de la plage (sable, rochers, galets),Texte,255 caractères max,Obligatoire, plusieurs valeurs possibles,Sable, Rochers
+Département,Département auquel la plage appartient,Texte,50 caractères max,Obligatoire,Alpes-Maritimes
+Nombre de touristes,Nombre de touristes annuels dans la ville,Entier,8 chiffres max,Facultatif,5000000
+Responsable région,Nom et prénom du responsable régional,Texte,100 caractères max,Obligatoire,Dupont, Jean
